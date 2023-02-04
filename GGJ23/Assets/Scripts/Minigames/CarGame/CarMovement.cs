@@ -14,6 +14,9 @@ public class CarMovement : MonoBehaviour
     public float gravity = 10f;
     public float steering = 80f;
     public float acceleration = 30f;
+    private bool startTransitionTimer = false;
+    private float tranisitionTimer = 0f;
+    [SerializeField] private GameInfo gameInfo;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +42,14 @@ public class CarMovement : MonoBehaviour
 
             currentSpeed = Mathf.SmoothStep(currentSpeed, speed, Time.deltaTime * 12f); speed = 0f;
             currentRotate = Mathf.Lerp(currentRotate, rotate, Time.deltaTime * 4f); rotate = 0f;
+        }
+
+        if (startTransitionTimer) {
+            tranisitionTimer += Time.deltaTime;
+        }
+
+        if (tranisitionTimer >= 2f) {
+            timer.loadTransitionScreen();
         }
 
     }
@@ -77,8 +88,15 @@ public class CarMovement : MonoBehaviour
             particles.gameObject.SetActive(true);
             timer.stopTimer(); 
             particles.Play();
+            gameInfo.gameLose();        
+            startTransitionTimer = true;
         } else if (other.gameObject.CompareTag("WinTag")) {
-
+            timer.setStatus(false);
+            timer.setCanPlay(false);
+            timer.stopTimer();
+            gameInfo.gameWin();
+            startTransitionTimer = true;
+            this.gameObject.GetComponent<BoxCollider>().enabled = false;
         }
     }
 }

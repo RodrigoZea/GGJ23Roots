@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TimerManager : MonoBehaviour
 {
@@ -33,10 +34,7 @@ public class TimerManager : MonoBehaviour
         //      Make text big so then we can scale it down to animate it
         minigameInstruction.transform.localScale = new Vector3(7, 7, 0);
         //      Hide other UI elements meanwhile the text is being animated
-        minigameTimerImage.gameObject.SetActive(false);
-        minigameTimerText.gameObject.SetActive(false);
-        minigameProgressBar.gameObject.SetActive(false);
-
+        showTimer(false);
         // First we show the minigame instructions
         StartCoroutine("instructionAnimation");
     }
@@ -59,6 +57,10 @@ public class TimerManager : MonoBehaviour
         minigameTimerText.gameObject.SetActive(show);
         minigameProgressBar.gameObject.SetActive(show);
         playerExpression.gameObject.SetActive(show);
+    }
+
+    public void loadTransitionScreen() {
+        SceneManager.LoadScene("TransitionScreen");
     }
 
     IEnumerator startTimer() {
