@@ -23,6 +23,8 @@ public class TimerManager : MonoBehaviour
     private bool timerOver = false;
     private bool hasLost;
     private bool timerStopped = false;
+    private bool startTransitionTimer = false;
+    private float tranisitionTimer = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,16 +44,21 @@ public class TimerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // If we can start the game, then do so. Timer has already been started.
-        if (canPlay) {
-            
-        } else {
-            
+        if (startTransitionTimer) {
+            tranisitionTimer += Time.deltaTime;
+        }
+
+        if (tranisitionTimer >= 2f) {
+            loadTransitionScreen();
         }
     }
 
     // Game related
         // Timer
+    public void startCountdown() {
+        startTransitionTimer = true;
+    }
+
     void showTimer(bool show) {
         minigameTimerImage.gameObject.SetActive(show);
         minigameTimerText.gameObject.SetActive(show);
