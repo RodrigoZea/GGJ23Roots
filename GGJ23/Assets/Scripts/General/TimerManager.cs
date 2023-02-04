@@ -10,6 +10,8 @@ public class TimerManager : MonoBehaviour
     public Text minigameTimerText;
     public Image minigameProgressBar;
     public Image minigameTimerImage;
+    public Image playerExpression;
+    public List<Sprite> spriteList = new List<Sprite>();
     [Header("Minigame Parameters")]
     [SerializeField] 
     private int timer = 10;
@@ -52,22 +54,35 @@ public class TimerManager : MonoBehaviour
 
     // Game related
         // Timer
-    void showTimer() {
-        minigameTimerImage.gameObject.SetActive(true);
-        minigameTimerText.gameObject.SetActive(true);
-        minigameProgressBar.gameObject.SetActive(true);
+    void showTimer(bool show) {
+        minigameTimerImage.gameObject.SetActive(show);
+        minigameTimerText.gameObject.SetActive(show);
+        minigameProgressBar.gameObject.SetActive(show);
+        playerExpression.gameObject.SetActive(show);
     }
 
     IEnumerator startTimer() {
         while (timer >= 1) {
             timer -= 1;
-            minigameTimerText.text = timer.ToString();
-            minigameProgressBar.fillAmount = Mathf.InverseLerp(0, originalTimer, timer);
+            minigameTimerText.text = timer.ToString() + "s";
+            float progress = Mathf.InverseLerp(0, originalTimer, timer);
+            minigameProgressBar.fillAmount = progress;
+            changeSprite(progress);
             yield return new WaitForSecondsRealtime(1f);   
         }
         canPlay = false;
         setStatus(true);
         Time.timeScale = 1;
+    }
+
+    private void changeSprite(float progress) {
+        if (progress <= 1 && progress >= 0.7) {
+            playerExpression.sprite = spriteList[0];
+        } else if (progress <= 0.6 && progress >= 0.4) {
+            playerExpression.sprite = spriteList[1];
+        } else if (progress <= 0.3 && progress >= 0) {
+            playerExpression.sprite = spriteList[2];
+        }
     }
 
     public bool getCanPlay() {
@@ -80,6 +95,25 @@ public class TimerManager : MonoBehaviour
 
     public void stopTimer () {
         StopCoroutine("startTimer");
+        StartCoroutine("loseTimer");
+    }
+
+    private IEnumerator loseTimer() {
+        showTimer(false);
+
+        //Play lose sfx
+        yield return new WaitForSecondsRealtime(2f);
+
+        // Send to lose screen
+    }
+
+    private IEnumerable winTimer() {
+        showTimer(false);
+
+        // Play win sfx
+        yield return new WaitForSecondsRealtime(2f);
+
+        // Send to win screen
     }
 
     // Instruction animations
@@ -103,7 +137,7 @@ public class TimerManager : MonoBehaviour
         }
         canPlay = true;
         minigameInstruction.gameObject.SetActive(false);
-        showTimer();
+        showTimer(true);
         StartCoroutine("startTimer");
     }
 
