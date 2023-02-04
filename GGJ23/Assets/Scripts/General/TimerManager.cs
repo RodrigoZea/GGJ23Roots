@@ -18,6 +18,7 @@ public class TimerManager : MonoBehaviour
     private string instruction = "Do something!";
     private bool canPlay = false;
     private bool timerOver = false;
+    private bool hasLost;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,7 +63,7 @@ public class TimerManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(1f);           
         }
         canPlay = false;
-        
+        setStatus(true);
     }
 
     // Instruction animations
@@ -88,6 +89,10 @@ public class TimerManager : MonoBehaviour
         minigameInstruction.gameObject.SetActive(false);
         showTimer();
         StartCoroutine("startTimer");
+    }
+
+    public void setStatus(bool status) {
+        hasLost = status;
     }
 
     
