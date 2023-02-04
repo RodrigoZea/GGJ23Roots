@@ -7,6 +7,7 @@ public class PoliceMovement : MonoBehaviour
 {
     private NavMeshAgent enemy;
     public Transform playerTarget;
+    public TimerManager timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,11 @@ public class PoliceMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemy.SetDestination(playerTarget.position);
+        if (timer.getCanPlay()) {
+            enemy.isStopped = false;
+            enemy.SetDestination(playerTarget.position);
+        } else  {
+            enemy.isStopped = true;
+        }
     }
 }

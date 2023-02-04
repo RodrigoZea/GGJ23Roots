@@ -19,6 +19,7 @@ public class TimerManager : MonoBehaviour
     private bool canPlay = false;
     private bool timerOver = false;
     private bool hasLost;
+    private bool timerStopped = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +45,8 @@ public class TimerManager : MonoBehaviour
         // If we can start the game, then do so. Timer has already been started.
         if (canPlay) {
             
+        } else {
+            
         }
     }
 
@@ -60,10 +63,23 @@ public class TimerManager : MonoBehaviour
             timer -= 1;
             minigameTimerText.text = timer.ToString();
             minigameProgressBar.fillAmount = Mathf.InverseLerp(0, originalTimer, timer);
-            yield return new WaitForSecondsRealtime(1f);           
+            yield return new WaitForSecondsRealtime(1f);   
         }
         canPlay = false;
         setStatus(true);
+        Time.timeScale = 1;
+    }
+
+    public bool getCanPlay() {
+        return canPlay;
+    }
+
+    public void setCanPlay(bool canPlayP) {
+        canPlay = canPlayP;
+    }
+
+    public void stopTimer () {
+        StopCoroutine("startTimer");
     }
 
     // Instruction animations
