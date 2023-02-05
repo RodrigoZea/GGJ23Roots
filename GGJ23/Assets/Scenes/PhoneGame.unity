@@ -132,6 +132,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 723224245324284304, guid: de694ecbd34e3fa4d9f8b0cb5b52e696,
         type: 3}
+      propertyPath: timer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 723224245324284304, guid: de694ecbd34e3fa4d9f8b0cb5b52e696,
+        type: 3}
       propertyPath: instruction
       value: Press the keys!
       objectReference: {fileID: 0}
