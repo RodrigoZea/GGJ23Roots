@@ -41,14 +41,15 @@ public class PhoneGame : MonoBehaviour
             if (Input.GetKey(keyToPress) && !keyPressed) {
                 if (keyToPress.ToString() == keyToShow) {
                     Debug.Log("good");
+
                     keyShown.color = Color.green;
                     keyPressed = true;
-                } else  {
-                    Debug.Log("bad");
-                    keyShown.color = Color.red;
-                    keyPressed = true;
-                }
-            } 
+                } 
+            } else if (Input.anyKey && !keyPressed) {
+                Debug.Log("bad");
+                keyShown.color = Color.red;
+                keyPressed = true;
+            }
         }
 
 
