@@ -33,11 +33,13 @@ public class TransitionManager : MonoBehaviour
     private void winScreen() {
         resultText.text = "NICE!";
         playerImage.sprite = spriteList[0];
+        // next scene (cutscene/game/whatever)
     }
 
     private void loseScreen() {
         resultText.text = "NOOOOO";
         playerImage.sprite = spriteList[1];
+        // replay game
     }
 
     // Update is called once per frame
