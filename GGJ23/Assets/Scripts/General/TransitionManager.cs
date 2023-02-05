@@ -35,6 +35,7 @@ public class TransitionManager : MonoBehaviour
         resultText.text = "NICE!";
         playerImage.sprite = spriteList[0];
         StartCoroutine(changeSceneDelay(2.0f));
+        gameInfo.sumScene();
         // next scene (cutscene/game/whatever)
     }
 

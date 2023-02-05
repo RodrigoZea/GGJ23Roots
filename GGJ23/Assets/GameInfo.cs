@@ -28,7 +28,10 @@ public class GameInfo : ScriptableObject
         string scene = "";
         if (currentScene == 1 || currentScene == 2 || currentScene == 4 || currentScene == 6 || currentScene == 8 || currentScene == 10 || currentScene == 11) {
             scene = "CutsceneTemplate";
-        } else {
+        } else if (currentScene == 12) {
+            scene = "StartScene";
+        } 
+        else {
             scene = levelNames[currentLevel];
         }
         Debug.Log(scene);
