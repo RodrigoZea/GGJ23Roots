@@ -23,10 +23,15 @@ public class MoveRandom : MonoBehaviour
     private AudioSource sound2;
     [SerializeField]
     private AudioClip electricity;
+    [SerializeField]
+    private AudioClip uhoh, powerdown;
+    [SerializeField]
+    private Light spot;
     float lastDirectionChange = 0;
     Vector3 randomDirection;
     private bool moving = true;
     public TimerManager timer;
+    private bool flag = true;
     void Start()
     {   
         sound2.volume = 0.1f;
@@ -42,7 +47,17 @@ public class MoveRandom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (timer.returnTimerOver() && flag){
+            flag = false;
+            timer.setCanPlay(false);
+            sound2.Stop();
+            sound.clip = powerdown;
+            sound2.clip = uhoh;
+            sound.Play();
+            sound2.Play();
+            spot.intensity = 0;
+            StartCoroutine(soundDelay());
+        }
     }
     private void FixedUpdate() {
         if(Time.time - lastDirectionChange > timeToDirectionChange) {
@@ -73,7 +88,12 @@ public class MoveRandom : MonoBehaviour
             timer.setStatus(true);
             timer.setCanPlay(false);
             timer.stopTimer(); 
-            timer.startCountdown();
         }
     }
+
+    IEnumerator soundDelay(){
+        yield return new WaitForSeconds(1.0f);
+        timer.startCountdown();
+    }
+
 }

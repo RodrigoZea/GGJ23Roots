@@ -293,6 +293,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 723224245324284304, guid: de694ecbd34e3fa4d9f8b0cb5b52e696,
         type: 3}
+      propertyPath: timer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 723224245324284304, guid: de694ecbd34e3fa4d9f8b0cb5b52e696,
+        type: 3}
       propertyPath: instruction
       value: Connect the power cable!
       objectReference: {fileID: 0}
@@ -2286,6 +2291,9 @@ MonoBehaviour:
   sound: {fileID: 2137828448}
   sound2: {fileID: 746127260}
   electricity: {fileID: 8300000, guid: 943b517ab9de9d140931a640e8851fc6, type: 3}
+  uhoh: {fileID: 8300000, guid: 3d6054b298a3a864d82c1e13b81ca807, type: 3}
+  powerdown: {fileID: 8300000, guid: 21fa137e52a00d6468f0a1432501031b, type: 3}
+  spot: {fileID: 1951870656}
   timer: {fileID: 1422153489}
 --- !u!1 &1353609579 stripped
 GameObject:
