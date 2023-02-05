@@ -18,6 +18,7 @@ public class Grab : MonoBehaviour
     [SerializeField]
     private AudioClip party, ah;
     public TimerManager timer;
+    private bool flag = true;
     void Start()
     {
         targetCamera = GetComponent<Camera>();
