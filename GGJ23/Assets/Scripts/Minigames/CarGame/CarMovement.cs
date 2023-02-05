@@ -43,6 +43,9 @@ public class CarMovement : MonoBehaviour
             currentRotate = Mathf.Lerp(currentRotate, rotate, Time.deltaTime * 4f); rotate = 0f;
         }
 
+        if (timer.returnTimerOver()) {
+            onLose();
+        }
     }
 
     private void FixedUpdate() {
@@ -73,14 +76,7 @@ public class CarMovement : MonoBehaviour
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Enemies"))
         {
-            timer.setStatus(true);
-            timer.setCanPlay(false);
-            kartModel.gameObject.SetActive(false);
-            particles.gameObject.SetActive(true);
-            timer.stopTimer(); 
-            particles.Play();
-            gameInfo.gameLose();        
-            timer.startCountdown();
+            onLose();
         } else if (other.gameObject.CompareTag("WinTag")) {
             timer.setStatus(false);
             timer.setCanPlay(false);
@@ -89,5 +85,16 @@ public class CarMovement : MonoBehaviour
             timer.startCountdown();
             this.gameObject.GetComponent<BoxCollider>().enabled = false;
         }
+    }
+
+    void onLose() {
+        timer.setStatus(true);
+        timer.setCanPlay(false);
+        kartModel.gameObject.SetActive(false);
+        particles.gameObject.SetActive(true);
+        timer.stopTimer(); 
+        particles.Play();
+        gameInfo.gameLose();        
+        timer.startCountdown();
     }
 }

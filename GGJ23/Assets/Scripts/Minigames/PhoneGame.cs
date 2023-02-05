@@ -8,6 +8,7 @@ public class PhoneGame : MonoBehaviour
 {
     public Canvas gameCanvas;
     public Text keyShown;
+    public GameInfo gameInfo;
     public TimerManager timerManager;
     private int timeLimit = 2;
     private float timer;
@@ -15,6 +16,8 @@ public class PhoneGame : MonoBehaviour
     private KeyCode keyToPress;
     private bool keyPressed;
     private string keyToShow;
+    private int randomX, randomY;
+    private float originalX, originalY;
     private KeyCode[] validKeys = new[] {
         KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.J, KeyCode.I, 
         KeyCode.K, KeyCode.L, KeyCode.M, KeyCode.O, KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T, KeyCode.U,
@@ -30,54 +33,53 @@ public class PhoneGame : MonoBehaviour
     void Update()
     {
         if (timerManager.getCanPlay()) {
+            keyShown.gameObject.SetActive(true);
             timer += Time.deltaTime;
-
-            if (timer >= timeLimit) {
+            float seconds = timer%60;
+            if (timer >= seconds) {
                 timer = 0;
                 keyPressed = false;
-                keyShown.color = Color.black;
-            }
+            }   
 
             if (Input.GetKey(keyToPress) && !keyPressed) {
                 if (keyToPress.ToString() == keyToShow) {
-                    Debug.Log("good");
-
                     keyShown.color = Color.green;
                     keyPressed = true;
                 } 
             } else if (Input.anyKey && !keyPressed) {
-                Debug.Log("bad");
                 keyShown.color = Color.red;
                 keyPressed = true;
+                
+                timerManager.setCanPlay(false);
+                timerManager.stopTimer(); 
+                gameInfo.gameLose();
+                timerManager.startCountdown();
             }
         }
 
-
-       /* if (timer >= timeLimit) {
-            // Dispatch a key
-
-            }
-
-            int randomX = Random.Range(0, Screen.width);
-            int randomY = Random.Range(0, Screen.height);
-            Vector2 position = new Vector2(randomX, randomY);
-
-            if (randomX < 0){
-                int xToMove = keyShown.gameObject.transform.x;
-                keyShown.rectTransform.position = xToMove;
-                if ()
-            }
-        }*/
+        if (timerManager.returnTimerOver()) {
+            timerManager.setCanPlay(false);
+            timerManager.stopTimer();
+            gameInfo.gameWin();
+            timerManager.startCountdown();
+        }
     }
 
     private IEnumerator dispatchKey() {
-        for (float f = 1f; f >= 0; f -= 0.1f) {
+        while (true) {
+            randomX = Random.Range(-200, 200);
+            randomY = Random.Range(-200, 200);
+            Vector3 currentPosition = new Vector3(randomX, randomY, 0);
+            keyShown.rectTransform.localPosition = currentPosition;
+
+            keyShown.color = Color.white;
             randomKeyIndex = Random.Range(0, validKeys.Length);
             keyToPress = validKeys[randomKeyIndex];
 
             keyToShow = keyToPress.ToString();
             keyShown.text = keyToShow;
-            yield return new WaitForSecondsRealtime(Random.Range(1, 2));
+            timeLimit = Random.Range(2, 3);
+            yield return new WaitForSecondsRealtime(timeLimit);
         }
     }
 }

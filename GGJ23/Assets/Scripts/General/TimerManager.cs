@@ -44,6 +44,9 @@ public class TimerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (timer <= 0) {
+            timerOver = true;
+        }
         if (startTransitionTimer) {
             tranisitionTimer += Time.deltaTime;
         }
@@ -57,6 +60,10 @@ public class TimerManager : MonoBehaviour
         // Timer
     public void startCountdown() {
         startTransitionTimer = true;
+    }
+
+    public bool returnTimerOver() {
+        return timerOver;
     }
 
     void showTimer(bool show) {
