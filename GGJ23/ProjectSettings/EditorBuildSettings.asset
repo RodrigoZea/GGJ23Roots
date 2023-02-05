@@ -12,9 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/CutsceneTemplate.unity
     guid: 3fc20f09e70f2e5479b174d0660cc694
   - enabled: 1
+    path: Assets/Scenes/Transition/TransitionScreen.unity
+    guid: 90544d6a86467424d988468e02b4370f
+  - enabled: 1
     path: Assets/Scenes/CarGame.unity
     guid: 76157bdd82ae87d40a0bbffa63188b89
   - enabled: 1
-    path: Assets/Scenes/Transition/TransitionScreen.unity
-    guid: 90544d6a86467424d988468e02b4370f
+    path: Assets/Scenes/Cables.unity
+    guid: c81a73c52f1b50849aa83add5dd03cfd
+  - enabled: 1
+    path: Assets/Scenes/PapersPlease.unity
+    guid: 24bbe950c740e42488799937c923cbd7
   m_configObjects: {}
