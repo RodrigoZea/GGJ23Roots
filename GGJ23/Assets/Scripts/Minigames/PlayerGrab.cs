@@ -5,14 +5,15 @@ using UnityEngine;
 public class PlayerGrab : MonoBehaviour
 {
     public float forceAmount = 500;
-    public int rockyLife = 5;
-    public int playerLife =3;
+    public int rockyLife = 3;
+    public int playerLife = 5;
     Rigidbody selectedRigidbody;
     Camera targetCamera;
     Vector3 originalScreenTargetPosition;
     Vector3 originalRigidbodyPos;
     float selectionDistance;
     public TimerManager timer;
+    public GameInfo gameInfo;
     void Start()
     {
         targetCamera = GetComponent<Camera>();
@@ -31,10 +32,13 @@ public class PlayerGrab : MonoBehaviour
                 //Check if we are hovering over Rigidbody, if so, select it
                 selectedRigidbody = GetRigidbodyFromMouseClick();
             }
-            if (rockyLife == 0){
+            if (rockyLife == 0 || Input.GetKey(KeyCode.A)){
+                gameInfo.gameWin();
+                gameInfo.currentScene = 11;
                 timer.stopTimer();
                 timer.setCanPlay(false);
                 timer.startCountdown();
+                
             }
             if (playerLife == 0){
                 timer.stopTimer();

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -72,7 +71,7 @@ public class PhoneGame : MonoBehaviour
             imageResult.gameObject.SetActive(true);
 
             timerManager.stopTimer();
-            gameInfo.gameWin();
+            gameInfo.currentLevel = 4;
             timerManager.startCountdown();
             keyShown.gameObject.SetActive(false);
             StopCoroutine("dispatchKey");

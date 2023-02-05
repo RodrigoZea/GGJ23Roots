@@ -399,9 +399,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceAmount: 500
-  rockyLife: 5
-  playerLife: 3
+  rockyLife: 3
+  playerLife: 5
   timer: {fileID: 957148854}
+  gameInfo: {fileID: 11400000, guid: 0f7a9b2a9339c8d4babedbaefa1a32ba, type: 2}
 --- !u!1 &157225490 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4149576653036600231, guid: 7f07a3a1855011f4a9ef6664a3e637fa,

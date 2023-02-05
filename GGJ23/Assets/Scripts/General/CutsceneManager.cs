@@ -48,7 +48,7 @@ public class CutsceneManager : MonoBehaviour
                 loreImage.sprite = loreImages[5];
                 loreText.text = "Now, why was I going too fast on the highway? Of course, it was that damn rock. We had quite a showdown but he kept chasing after me even after I defeated him. Wait a minute, why was I even fighting a buff rock?";
                 break;
-            case 11:
+            case 12:
                 loreImage.sprite = loreImages[6];
                 loreText.text = "I REMEMBER! IT ALL STARTED HERE! I was accused of murdering someone because a rock made him trip, and knocked him unconscious. Of course, this rock happened to fall out of nowhere just to make my life a living hell. Oh well, that's how I got into this Deep Rooted Issue. Sorry for being cheesy, I just wanted to say the line.";
                 break;
@@ -59,6 +59,7 @@ public class CutsceneManager : MonoBehaviour
         gameInfo.sumScene();
         string sceneName = gameInfo.returnScene();
         SceneManager.LoadScene(sceneName);
+        
     }
 
 
