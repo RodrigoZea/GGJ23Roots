@@ -9,9 +9,12 @@ public class PhoneGame : MonoBehaviour
     public Canvas gameCanvas;
     public Text keyShown;
     public GameInfo gameInfo;
+    public Image imageResult;
+    public Image imageNormal;
+    public List<Sprite> sprites = new List<Sprite>();
     public TimerManager timerManager;
     private int timeLimit = 2;
-    private float timer;
+    private float timer=0;
     private int randomKeyIndex;
     private KeyCode keyToPress;
     private bool keyPressed;
@@ -35,34 +38,57 @@ public class PhoneGame : MonoBehaviour
         if (timerManager.getCanPlay()) {
             keyShown.gameObject.SetActive(true);
             timer += Time.deltaTime;
-            float seconds = timer%60;
+
+            float seconds = timeLimit%60;
+
             if (timer >= seconds) {
-                timer = 0;
-                keyPressed = false;
-            }   
+                if (!keyPressed) {
+                    onLose();
+                } 
+            }else {
+                if (keyPressed) {
+                    timer = 0;
+                    keyPressed = false;
+                }
+            }
 
             if (Input.GetKey(keyToPress) && !keyPressed) {
                 if (keyToPress.ToString() == keyToShow) {
                     keyShown.color = Color.green;
                     keyPressed = true;
+
+                    timer = 0;
                 } 
             } else if (Input.anyKey && !keyPressed) {
-                keyShown.color = Color.red;
-                keyPressed = true;
-                
-                timerManager.setCanPlay(false);
-                timerManager.stopTimer(); 
-                gameInfo.gameLose();
-                timerManager.startCountdown();
+                onLose();
             }
         }
 
         if (timerManager.returnTimerOver()) {
             timerManager.setCanPlay(false);
+
+            imageNormal.gameObject.SetActive(false);
+            imageResult.sprite = sprites[0];
+            imageResult.gameObject.SetActive(true);
+
             timerManager.stopTimer();
             gameInfo.gameWin();
             timerManager.startCountdown();
+            keyShown.gameObject.SetActive(false);
+            StopCoroutine("dispatchKey");
         }
+    }
+
+    private void onLose() {
+        keyShown.color = Color.red;
+        timerManager.setCanPlay(false);
+        imageNormal.gameObject.SetActive(false);
+        imageResult.sprite = sprites[1];
+        imageResult.gameObject.SetActive(true);
+        timerManager.stopTimer(); 
+        gameInfo.gameLose();
+        timerManager.startCountdown();
+        StopCoroutine("dispatchKey");
     }
 
     private IEnumerator dispatchKey() {
