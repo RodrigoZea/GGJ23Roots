@@ -31,6 +31,7 @@ public class MoveRandom : MonoBehaviour
     Vector3 randomDirection;
     private bool moving = true;
     public TimerManager timer;
+    public GameInfo gameInfo;
     private bool flag = true;
     void Start()
     {   
@@ -56,7 +57,8 @@ public class MoveRandom : MonoBehaviour
             sound.Play();
             sound2.Play();
             spot.intensity = 0;
-            StartCoroutine(soundDelay());
+            gameInfo.gameLose();
+            StartCoroutine(soundDelay(1.0f));
         }
     }
     private void FixedUpdate() {
@@ -75,6 +77,7 @@ public class MoveRandom : MonoBehaviour
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag == "Player" && timer.getCanPlay()){
             Debug.Log(other.gameObject.name);
+            gameInfo.gameWin();
             confetti.Play();
             confetti.Play();
             sound.Play();
@@ -88,11 +91,14 @@ public class MoveRandom : MonoBehaviour
             timer.setStatus(true);
             timer.setCanPlay(false);
             timer.stopTimer(); 
+            StartCoroutine(soundDelay(1.5f));
         }
     }
 
-    IEnumerator soundDelay(){
-        yield return new WaitForSeconds(1.0f);
+    IEnumerator soundDelay(float t){
+        yield return new WaitForSeconds(t);
+        Time.timeScale = startTimeScale;
+        Time.fixedDeltaTime = startFixedDeltaTime;
         timer.startCountdown();
     }
 

@@ -19,6 +19,7 @@ public class Grab : MonoBehaviour
     private AudioClip party, ah;
     public TimerManager timer;
     private bool flag = true;
+    public GameInfo gameInfo;
     void Start()
     {
         targetCamera = GetComponent<Camera>();
@@ -67,6 +68,7 @@ public class Grab : MonoBehaviour
                 originalRigidbodyPos = hitInfo.collider.transform.position;
                 if (hitInfo.collider.gameObject.tag == "WinTag"){
                     Debug.Log("Winner");
+                    gameInfo.gameWin();
                     timer.stopTimer();
                     timer.setCanPlay(false);
                     sound2.volume = 1.0f;
@@ -74,8 +76,7 @@ public class Grab : MonoBehaviour
                     sound2.clip = party;
                     sound1.Play();
                     sound2.Play();
-                    StartCoroutine(soundDelay());
-                    
+                    StartCoroutine(soundDelay(3.0f));
                 }
                 return hitInfo.collider.gameObject.GetComponent<Rigidbody>();
             }
@@ -84,8 +85,8 @@ public class Grab : MonoBehaviour
         return null;
     }
 
-    IEnumerator soundDelay(){
-        yield return new WaitForSeconds(3.0f);
+    IEnumerator soundDelay(float t){
+        yield return new WaitForSeconds(t);
         timer.startCountdown();
     }
 }

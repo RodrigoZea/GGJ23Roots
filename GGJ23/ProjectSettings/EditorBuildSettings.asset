@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PapersPlease.unity
     guid: 24bbe950c740e42488799937c923cbd7
+  - enabled: 1
+    path: Assets/Scenes/PhoneGame.unity
+    guid: 8afccf8bd3581ff4da804a0ae0742a4d
+  - enabled: 1
+    path: Assets/Scenes/FightTest.unity
+    guid: 280635b997f18ea4c88e8b72cdb19964
   m_configObjects: {}

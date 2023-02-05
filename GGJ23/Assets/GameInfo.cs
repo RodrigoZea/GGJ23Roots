@@ -6,6 +6,7 @@ public class GameInfo : ScriptableObject
 {
     private List<string> levelNames = new List<string>() {"Cables", "CarGame", "PapersPlease", "PhoneGame", "FightTest"};
     public bool gameResult = false;
+    public int currentLevel = 0;
     public int lives = 3;
     public int currentScene = 0;
     public string previousScene = "";
@@ -16,6 +17,8 @@ public class GameInfo : ScriptableObject
     }
     public void gameWin() {
         gameResult = true;
+        currentLevel++;
+
     }
     public void sumScene() {
         currentScene += 1;
@@ -27,10 +30,10 @@ public class GameInfo : ScriptableObject
 
         if (currentScene == 1 || currentScene == 2 || currentScene == 4) {
             scene = "CutsceneTemplate";
-        } else if (currentScene == 3) {
-            scene = "Cables";
+        } else {
+            scene = levelNames[currentLevel];
         }
-
+        Debug.Log(scene);
         return scene;
     }
 

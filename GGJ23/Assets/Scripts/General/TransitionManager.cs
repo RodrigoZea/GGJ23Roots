@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TransitionManager : MonoBehaviour
 {
@@ -33,12 +34,14 @@ public class TransitionManager : MonoBehaviour
     private void winScreen() {
         resultText.text = "NICE!";
         playerImage.sprite = spriteList[0];
+        StartCoroutine(changeSceneDelay(2.0f));
         // next scene (cutscene/game/whatever)
     }
 
     private void loseScreen() {
         resultText.text = "NOOOOO";
         playerImage.sprite = spriteList[1];
+        StartCoroutine(changeSceneDelay(1.0f));
         // replay game
     }
 
@@ -64,5 +67,10 @@ public class TransitionManager : MonoBehaviour
                 livesList[2].SetActive(false);
                 break;
         }
+    }
+
+    IEnumerator changeSceneDelay(float t){
+        yield return new WaitForSeconds(t);
+        SceneManager.LoadScene(gameInfo.returnScene());
     }
 }

@@ -15,6 +15,7 @@ public class Pedal : MonoBehaviour
     private int times = 1;
     private int count = 0;
     public TimerManager timer;
+    public GameInfo gameInfo;
     void Start()
     {
 
@@ -26,9 +27,9 @@ public class Pedal : MonoBehaviour
         if (transform.hasChanged && timer.getCanPlay())
         {
             if (times == 0){
-            print("Pedal");
             count++;
             if (count == 1){
+                gameInfo.gameLose();
                 timer.stopTimer();
                 timer.setCanPlay(false);
                 sound.Play();

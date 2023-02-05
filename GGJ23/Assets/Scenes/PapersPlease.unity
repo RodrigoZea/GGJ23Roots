@@ -262,6 +262,7 @@ MonoBehaviour:
   party: {fileID: 8300000, guid: d021d9036835519459d70bdcab1f3a0d, type: 3}
   ah: {fileID: 8300000, guid: 92e324edffada0b46a1c59cf7bdda060, type: 3}
   timer: {fileID: 1814281294}
+  gameInfo: {fileID: 11400000, guid: 0f7a9b2a9339c8d4babedbaefa1a32ba, type: 2}
 --- !u!82 &12453198
 AudioSource:
   m_ObjectHideFlags: 0
@@ -375,6 +376,7 @@ MonoBehaviour:
   sound2: {fileID: 975693580}
   policeChatter: {fileID: 8300000, guid: 749576288e6168e439c123ba5e1538c5, type: 3}
   uhoh: {fileID: 8300000, guid: 3d6054b298a3a864d82c1e13b81ca807, type: 3}
+  gameInfo: {fileID: 11400000, guid: 0f7a9b2a9339c8d4babedbaefa1a32ba, type: 2}
 --- !u!1 &85291744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,6 +1550,7 @@ MonoBehaviour:
   uhoh: {fileID: 8300000, guid: d34c507dcce37994cba0182a97b3c9c9, type: 3}
   police: {fileID: 8300000, guid: b45ad8ca7389bf744994e3343752f0fb, type: 3}
   timer: {fileID: 1814281294}
+  gameInfo: {fileID: 0}
 --- !u!1001 &982684796
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class License : MonoBehaviour
     [SerializeField]
     private AudioClip policeChatter, uhoh;
     private bool flag = true;
+    public GameInfo gameInfo;
     void Start()
     {
         
@@ -21,6 +22,7 @@ public class License : MonoBehaviour
     void Update()
     {
         if (timer.returnTimerOver() && flag){
+            gameInfo.gameLose();
             flag = false;
             sound1.Stop();
             sound2.Stop();
