@@ -26,9 +26,7 @@ public class GameInfo : ScriptableObject
 
     public string returnScene() {
         string scene = "";
-        int randomScene = 0;
-
-        if (currentScene == 1 || currentScene == 2 || currentScene == 4) {
+        if (currentScene == 1 || currentScene == 2 || currentScene == 4 || currentScene == 6 || currentScene == 8 || currentScene == 10 || currentScene == 11) {
             scene = "CutsceneTemplate";
         } else {
             scene = levelNames[currentLevel];
